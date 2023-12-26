@@ -1,0 +1,71 @@
+import { DateValue } from '@internationalized/date';
+import type { PrimitiveProps } from 'radix-vue';
+import type { ComputedRef, ShallowReactive, ShallowRef } from 'vue';
+
+export interface CalendarRootProps extends PrimitiveProps {
+  selected?: Date;
+  month?: Date;
+  timeZone?: string;
+  locale?: string;
+  disabled?: boolean;
+  readOnly?: boolean;
+  // visibleDuration
+  // pageBehavior
+  // minValue
+  // maxValue
+  // isDateUnavailable
+  // check
+  // showWeekNumbers
+}
+
+export type CalendarRootEmits = {
+  'update:selected': [value: Date];
+  'update:month': [value: Date];
+};
+
+export interface CalendarEventProps {
+  selected: ShallowReactive<Map<string, DateValue>>;
+  day: DateValue;
+  key: string;
+  timeZone: string;
+}
+
+export interface CalendarRootContext {
+  selected?: Date | Date[];
+  month?: Date;
+  timeZone: string;
+  locale: string;
+  disabled: boolean;
+  readOnly: boolean;
+  onAdditonalProps?: (props: CalendarEventProps) => Record<string, string | number | boolean | undefined>;
+  onClick: (props: CalendarEventProps) => void;
+  onMouseEnter?: (props: CalendarEventProps) => void;
+  onMouseLeave?: (props: CalendarEventProps) => void;
+  onCheckSelected?: (props: CalendarEventProps) => boolean;
+  onUpdatedMonth: (value: Date) => void;
+}
+
+export interface CalendarRootInjection {
+  month: ShallowRef<DateValue>;
+  selected: ShallowReactive<Map<string, DateValue>>;
+  today: DateValue;
+  locale: ComputedRef<string>;
+  timeZone: ComputedRef<string>;
+  disabled: ComputedRef<boolean>;
+  readOnly: ComputedRef<boolean>;
+  onAdditonalProps?: (props: CalendarEventProps) => Record<string, string | number | boolean | undefined>;
+  onClick: (props: CalendarEventProps) => void;
+  onMouseEnter?: (props: CalendarEventProps) => void;
+  onMouseLeave?: (props: CalendarEventProps) => void;
+  onCheckSelected?: (props: CalendarEventProps) => boolean;
+  onNextMonth: () => void;
+  onPrevMonth: () => void;
+}
+
+export interface CalendarGridHeaderCellProps extends PrimitiveProps {
+  day: DateValue;
+  format?: string;
+  capitalize?: boolean;
+  uppercase?: boolean;
+  lowercase?: boolean;
+}
