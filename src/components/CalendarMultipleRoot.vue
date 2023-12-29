@@ -1,9 +1,9 @@
 <script setup lang="ts">
   import { Primitive } from 'radix-vue';
-  import { CalendarEventProps } from '~/types/calendar';
+  import type { CalendarEventProps } from '~/types/calendar';
   import { provideCalendarRoot } from '~/providers/calendar';
   import { getLocalTimeZone } from '@internationalized/date';
-  import {
+  import type {
     CalendarMultipleRootEmits,
     CalendarMultipleRootProps,
   } from '~/types/calendar_multiple';

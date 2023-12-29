@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import { Primitive, PrimitiveProps } from 'radix-vue';
+  import { Primitive, type PrimitiveProps } from 'radix-vue';
   import { injectCalendarRoot } from '~/providers/calendar';
 
   const props = withDefaults(defineProps<PrimitiveProps>(), {

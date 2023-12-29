@@ -1,9 +1,9 @@
 <script setup lang="ts">
   import { Primitive } from 'radix-vue';
-  import { CalendarEventProps } from '~/types/calendar';
+  import type { CalendarEventProps } from '~/types/calendar';
   import { provideCalendarRoot } from '~/providers/calendar';
-  import { DateValue, getLocalTimeZone } from '@internationalized/date';
-  import {
+  import { type CalendarDate, getLocalTimeZone } from '@internationalized/date';
+  import type {
     CalendarRangeRootEmits,
     CalendarRangeRootProps,
   } from '~/types/calendar_range';
@@ -20,8 +20,8 @@
   });
 
   const emit = defineEmits<CalendarRangeRootEmits>();
-  const startDate = ref<DateValue | null>(null);
-  const endDate = ref<DateValue | null>(null);
+  const startDate = ref<CalendarDate | null>(null);
+  const endDate = ref<CalendarDate | null>(null);
 
   const onClick = ({ selected, key, day, timeZone }: CalendarEventProps) => {
     if (selected.size > 0) {

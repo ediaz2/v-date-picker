@@ -1,0 +1,23 @@
+{
+  "extends": "@vue/tsconfig/tsconfig.dom.json",
+  "include": ["env.d.ts", "src/**/*", "src/**/*.ts", "src/**/*.vue"],
+  "exclude": [
+    "src/vitest.setup.ts",
+    "src/main.ts",
+    "src/App.vue",
+    "src/**/*.test.ts"
+  ],
+  "compilerOptions": {
+    "moduleResolution": "node",
+    "noEmit": false,
+    "composite": false,    
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "baseUrl": ".",
+    "paths": {
+      "~/*": ["./src/*"]
+    },
+    "sourceMap": true,
+    "outDir": "dist",
+  }
+}

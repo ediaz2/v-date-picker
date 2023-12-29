@@ -1,6 +1,6 @@
 <script setup lang="ts">
   import { Primitive } from 'radix-vue';
-  import { CalendarGridHeaderCellProps } from '~/types/calendar';
+  import type { CalendarGridHeaderCellProps } from '~/types/calendar';
   import { useCalendarCell } from '~/composables/useCalendarCell';
 
   const props = withDefaults(defineProps<CalendarGridHeaderCellProps>(), {

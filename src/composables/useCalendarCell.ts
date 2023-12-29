@@ -1,6 +1,6 @@
 import { injectCalendarRoot } from '~/providers/calendar';
 import { computed, ref } from 'vue';
-import { CalendarGridHeaderCellProps } from '~/types/calendar';
+import type { CalendarGridHeaderCellProps } from '~/types/calendar';
 import { getDay } from '~/utils/getDay';
 
 export const useCalendarCell = ({ day }: CalendarGridHeaderCellProps) => {

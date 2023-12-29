@@ -1,9 +1,9 @@
-import { DateValue } from '@internationalized/date';
+import type { CalendarDate } from '@internationalized/date';
 
 interface IsDateInRange {
-  day: DateValue;
-  start?: DateValue;
-  end?: DateValue;
+  day: CalendarDate;
+  start?: CalendarDate;
+  end?: CalendarDate;
   timeZone: string;
 }
 

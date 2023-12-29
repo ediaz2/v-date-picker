@@ -1,6 +1,7 @@
-import { CalendarRootProps } from "./calendar";
+import type { CalendarRootProps } from './calendar';
 
-export interface CalendarMultipleRootProps extends Omit<CalendarRootProps, 'selected'> {
+export interface CalendarMultipleRootProps
+  extends Omit<CalendarRootProps, 'selected'> {
   selected?: Date[];
 }
 

@@ -4,7 +4,7 @@
     startOfMonth,
     startOfWeek,
   } from '@internationalized/date';
-  import { Primitive, PrimitiveProps } from 'radix-vue';
+  import { Primitive, type PrimitiveProps } from 'radix-vue';
   import { computed } from 'vue';
   import { injectCalendarRoot } from '~/providers/calendar';
 

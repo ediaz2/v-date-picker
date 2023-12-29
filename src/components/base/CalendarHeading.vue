@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import { Primitive, PrimitiveProps } from 'radix-vue';
+  import { Primitive, type PrimitiveProps } from 'radix-vue';
   import { computed } from 'vue';
   import { formatCalendarDate } from '~/utils/formatDate';
   import { injectCalendarRoot } from '~/providers/calendar';

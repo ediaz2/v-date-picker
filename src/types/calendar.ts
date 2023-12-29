@@ -1,4 +1,4 @@
-import { DateValue } from '@internationalized/date';
+import type { CalendarDate } from '@internationalized/date';
 import type { PrimitiveProps } from 'radix-vue';
 import type { ComputedRef, ShallowReactive, ShallowRef } from 'vue';
 
@@ -24,8 +24,8 @@ export type CalendarRootEmits = {
 };
 
 export interface CalendarEventProps {
-  selected: ShallowReactive<Map<string, DateValue>>;
-  day: DateValue;
+  selected: ShallowReactive<Map<string, CalendarDate>>;
+  day: CalendarDate;
   key: string;
   timeZone: string;
 }
@@ -37,7 +37,9 @@ export interface CalendarRootContext {
   locale: string;
   disabled: boolean;
   readOnly: boolean;
-  onAdditonalProps?: (props: CalendarEventProps) => Record<string, string | number | boolean | undefined>;
+  onAdditonalProps?: (
+    props: CalendarEventProps,
+  ) => Record<string, string | number | boolean | undefined>;
   onClick: (props: CalendarEventProps) => void;
   onMouseEnter?: (props: CalendarEventProps) => void;
   onMouseLeave?: (props: CalendarEventProps) => void;
@@ -46,14 +48,16 @@ export interface CalendarRootContext {
 }
 
 export interface CalendarRootInjection {
-  month: ShallowRef<DateValue>;
-  selected: ShallowReactive<Map<string, DateValue>>;
-  today: DateValue;
+  month: ShallowRef<CalendarDate>;
+  selected: ShallowReactive<Map<string, CalendarDate>>;
+  today: CalendarDate;
   locale: ComputedRef<string>;
   timeZone: ComputedRef<string>;
   disabled: ComputedRef<boolean>;
   readOnly: ComputedRef<boolean>;
-  onAdditonalProps?: (props: CalendarEventProps) => Record<string, string | number | boolean | undefined>;
+  onAdditonalProps?: (
+    props: CalendarEventProps,
+  ) => Record<string, string | number | boolean | undefined>;
   onClick: (props: CalendarEventProps) => void;
   onMouseEnter?: (props: CalendarEventProps) => void;
   onMouseLeave?: (props: CalendarEventProps) => void;
@@ -63,7 +67,7 @@ export interface CalendarRootInjection {
 }
 
 export interface CalendarGridHeaderCellProps extends PrimitiveProps {
-  day: DateValue;
+  day: CalendarDate;
   format?: string;
   capitalize?: boolean;
   uppercase?: boolean;

@@ -1,4 +1,4 @@
-import { type DateValue, toCalendarDateTime } from '@internationalized/date';
+import { type CalendarDate, toCalendarDateTime } from '@internationalized/date';
 
 const FORMATTERS: Record<string, (date: Date, locale: string) => string> = {
   // Time in ms
@@ -68,14 +68,15 @@ export const formatDate = (
   locale: string,
 ): string => {
   return format.replace(createMatcher(), (token: string) => {
-    if (FORMATTERS.hasOwnProperty(token))
+    if (Object.prototype.hasOwnProperty.call(FORMATTERS, token)) {
       return FORMATTERS[token](date, locale);
+    }
     return token.replace(/\[|\]/g, '');
   });
 };
 
 export const formatCalendarDate = (
-  value: DateValue,
+  value: CalendarDate,
   format: string,
   locale: string,
   timeZone: string,

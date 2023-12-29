@@ -35,3 +35,6 @@ playwright-report/
 vite.config.ts.timestamp*
 */.vitepress/cache
 package-lock.json
+
+*.tgz
+*.tsbuildinfo

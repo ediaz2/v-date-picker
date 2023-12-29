@@ -1,6 +1,6 @@
 <script setup lang="ts">
   import { Primitive } from 'radix-vue';
-  import {
+  import type {
     CalendarRootEmits,
     CalendarRootProps,
     CalendarEventProps,

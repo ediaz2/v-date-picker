@@ -1,12 +1,15 @@
 import {
-  CalendarDate,
+  type CalendarDate,
   parseDate,
   today,
   startOfMonth,
 } from '@internationalized/date';
 import type { InjectionKey } from 'vue';
 import { computed, inject, provide, shallowRef } from 'vue';
-import { CalendarRootContext, CalendarRootInjection } from '~/types/calendar';
+import type {
+  CalendarRootContext,
+  CalendarRootInjection,
+} from '~/types/calendar';
 import { parseDateToMap } from '~/utils/parseDate';
 
 export const CalendarRoot = Symbol(

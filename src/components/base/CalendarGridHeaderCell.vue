@@ -2,7 +2,7 @@
   import { Primitive } from 'radix-vue';
   import { computed } from 'vue';
   import { formatCalendarDate } from '~/utils/formatDate';
-  import { CalendarGridHeaderCellProps } from '~/types/calendar';
+  import type { CalendarGridHeaderCellProps } from '~/types/calendar';
   import { injectCalendarRoot } from '~/providers/calendar';
 
   const props = withDefaults(defineProps<CalendarGridHeaderCellProps>(), {
