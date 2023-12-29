@@ -1,7 +1,24 @@
 {
-  "name": "vite-project",
-  "version": "0.0.0",
-  "private": true,
+  "name": "v-date-picker",
+  "version": "0.1.1",
+  "keywords": [
+    "vue",
+    "date",
+    "calendar",
+    "datepicker",
+    "date-picker",
+    "vue3"
+  ],
+  "homepage": "https://github.com/ediaz2/v-date-picker#readme",
+  "bugs": {
+    "url": "https://github.com/ediaz2/v-date-picker/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ediaz2/v-date-picker.git"
+  },
+  "license": "MIT",
+  "author": "Eduardo Diaz",
   "type": "module",
   "exports": {
     ".": {
@@ -21,8 +38,8 @@
     "build:lib": "vite build",
     "build:types": "vue-tsc -p tsconfig.build.json && tsc-alias -p tsconfig.build.json",
     "dev": "vite",
-    "lint:types": "vue-tsc --build --force",
     "lint:eslint": "eslint . --ext .vue,.ts --fix --ignore-path .gitignore",
+    "lint:types": "vue-tsc --build --force",
     "preview": "vite preview",
     "prepublish": "npm run build"
   },
