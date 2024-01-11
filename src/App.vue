@@ -113,7 +113,11 @@
                     class="calendar_grid_body_cell"
                     v-for="day in getDatesInWeek(week)"
                     :key="day.day.toString()"
-                    :day="day" />
+                    :day="day">
+                    <span>
+                      {{ day }}
+                    </span>
+                  </CalendarGridBodyCell>
                 </CalendarGridRow>
               </template>
             </CalendarGridBody>

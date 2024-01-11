@@ -14,11 +14,10 @@
 
 <template>
   <Primitive :as="as" :as-child="asChild" v-bind="cellProps">
-    <slot>
-      <div v-bind="buttonProps">
+    <div v-bind="buttonProps">
+      <slot>
         {{ props.day.day }}
-      </div>
-    </slot>
+      </slot>
+    </div>
   </Primitive>
 </template>
-~/composables/useCalendarCell
