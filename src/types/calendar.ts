@@ -3,73 +3,73 @@ import type { PrimitiveProps } from 'radix-vue';
 import type { ComputedRef, ShallowReactive, ShallowRef } from 'vue';
 
 export interface CalendarRootProps extends PrimitiveProps {
-  selected?: Date;
-  month?: Date;
-  timeZone?: string;
-  locale?: string;
-  disabled?: boolean;
-  readOnly?: boolean;
-  // visibleDuration
-  // pageBehavior
-  // minValue
-  // maxValue
-  // isDateUnavailable
-  // check
-  // showWeekNumbers
+	selected?: Date;
+	month?: Date;
+	timeZone?: string;
+	locale?: string;
+	disabled?: boolean;
+	readOnly?: boolean;
+	// visibleDuration
+	// pageBehavior
+	// minValue
+	// maxValue
+	// isDateUnavailable
+	// check
+	// showWeekNumbers
 }
 
 export type CalendarRootEmits = {
-  'update:selected': [value: Date];
-  'update:month': [value: Date];
+	'update:selected': [value: Date];
+	'update:month': [value: Date];
 };
 
 export interface CalendarEventProps {
-  selected: ShallowReactive<Map<string, CalendarDate>>;
-  day: CalendarDate;
-  key: string;
-  timeZone: string;
+	selected: ShallowReactive<Map<string, CalendarDate>>;
+	day: CalendarDate;
+	key: string;
+	timeZone: string;
 }
 
 export interface CalendarRootContext {
-  selected?: Date | Date[];
-  month?: Date;
-  timeZone: string;
-  locale: string;
-  disabled: boolean;
-  readOnly: boolean;
-  onAdditonalProps?: (
-    props: CalendarEventProps,
-  ) => Record<string, string | number | boolean | undefined>;
-  onClick: (props: CalendarEventProps) => void;
-  onMouseEnter?: (props: CalendarEventProps) => void;
-  onMouseLeave?: (props: CalendarEventProps) => void;
-  onCheckSelected?: (props: CalendarEventProps) => boolean;
-  onUpdatedMonth: (value: Date) => void;
+	selected?: Date | Date[];
+	month?: Date;
+	timeZone: string;
+	locale: string;
+	disabled: boolean;
+	readOnly: boolean;
+	onAdditonalProps?: (
+		props: CalendarEventProps,
+	) => Record<string, string | number | boolean | undefined>;
+	onClick: (props: CalendarEventProps) => void;
+	onMouseEnter?: (props: CalendarEventProps) => void;
+	onMouseLeave?: (props: CalendarEventProps) => void;
+	onCheckSelected?: (props: CalendarEventProps) => boolean;
+	onUpdatedMonth: (value: Date) => void;
 }
 
 export interface CalendarRootInjection {
-  month: ShallowRef<CalendarDate>;
-  selected: ShallowReactive<Map<string, CalendarDate>>;
-  today: CalendarDate;
-  locale: ComputedRef<string>;
-  timeZone: ComputedRef<string>;
-  disabled: ComputedRef<boolean>;
-  readOnly: ComputedRef<boolean>;
-  onAdditonalProps?: (
-    props: CalendarEventProps,
-  ) => Record<string, string | number | boolean | undefined>;
-  onClick: (props: CalendarEventProps) => void;
-  onMouseEnter?: (props: CalendarEventProps) => void;
-  onMouseLeave?: (props: CalendarEventProps) => void;
-  onCheckSelected?: (props: CalendarEventProps) => boolean;
-  onNextMonth: () => void;
-  onPrevMonth: () => void;
+	month: ShallowRef<CalendarDate>;
+	selected: ShallowReactive<Map<string, CalendarDate>>;
+	today: CalendarDate;
+	locale: ComputedRef<string>;
+	timeZone: ComputedRef<string>;
+	disabled: ComputedRef<boolean>;
+	readOnly: ComputedRef<boolean>;
+	onAdditonalProps?: (
+		props: CalendarEventProps,
+	) => Record<string, string | number | boolean | undefined>;
+	onClick: (props: CalendarEventProps) => void;
+	onMouseEnter?: (props: CalendarEventProps) => void;
+	onMouseLeave?: (props: CalendarEventProps) => void;
+	onCheckSelected?: (props: CalendarEventProps) => boolean;
+	onNextMonth: () => void;
+	onPrevMonth: () => void;
 }
 
 export interface CalendarGridHeaderCellProps extends PrimitiveProps {
-  day: CalendarDate;
-  format?: string;
-  capitalize?: boolean;
-  uppercase?: boolean;
-  lowercase?: boolean;
+	day: CalendarDate;
+	format?: string;
+	capitalize?: boolean;
+	uppercase?: boolean;
+	lowercase?: boolean;
 }
