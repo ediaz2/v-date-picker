@@ -2,6 +2,18 @@ import type { CalendarDate } from '@internationalized/date';
 import type { PrimitiveProps } from 'radix-vue';
 import type { ComputedRef, ShallowReactive, ShallowRef } from 'vue';
 
+export interface CalendarViewProps extends PrimitiveProps {
+	offsetMonth?: number;
+}
+
+export interface CalendarViewContext {
+	offsetMonth: number;
+}
+
+export interface CalendarViewInjection {
+	offsetMonth: ComputedRef<number>;
+}
+
 export interface CalendarRootProps extends PrimitiveProps {
 	selected?: Date;
 	month?: Date;

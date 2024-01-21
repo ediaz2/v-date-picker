@@ -15,7 +15,7 @@ export const CalendarRoot = Symbol(
 	'CalendarRoot',
 ) as InjectionKey<CalendarRootInjection>;
 
-export const provideCalendarRoot = ({
+export const providerCalendarRoot = ({
 	selected,
 	month,
 	timeZone,

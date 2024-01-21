@@ -3,6 +3,7 @@
 	import CalendarMultipleRoot from './components/CalendarMultipleRoot.vue';
 	import CalendarSimpleRoot from './components/CalendarSimpleRoot.vue';
 	import CalendarHeader from './components/base/CalendarHeader.vue';
+	import CalendarView from './components/base/CalendarView.vue';
 	import CalendarHeading from './components/base/CalendarHeading.vue';
 	import CalendarContent from './components/base/CalendarContent.vue';
 	import CalendarNextButton from './components/base/CalendarNextButton.vue';
@@ -26,6 +27,9 @@
 
 	const calendarRange = ref<Date>();
 	const selectedRange = ref<[Date, Date] | undefined>();
+
+	const calendarRange2 = ref<Date>();
+	const selectedRange2 = ref<[Date, Date] | undefined>();
 </script>
 
 <template>
@@ -50,41 +54,43 @@
 				:start-of-week="1"
 				locale="es-PE"
 				class="calendar_root">
-				<CalendarHeader class="calendar_header">
-					<CalendarPrevButton as-child>
-						<button>Atras</button>
-					</CalendarPrevButton>
-					<CalendarHeading as="h2" />
-					<CalendarNextButton />
-				</CalendarHeader>
-				<CalendarContent>
-					<CalendarGrid class="calendar_grid">
-						<CalendarGridHeader>
-							<template #default="{ weekDays }">
-								<CalendarGridRow>
-									<CalendarGridHeaderCell
-										v-for="day in weekDays"
-										:key="day.day"
-										:day="day"
-										format="EEEEE" />
-								</CalendarGridRow>
-							</template>
-						</CalendarGridHeader>
-						<CalendarGridBody>
-							<template #default="{ weeksInMonth }">
-								<CalendarGridRow
-									v-for="{ keyWeek, week } in weeksInMonth"
-									:key="keyWeek">
-									<CalendarGridBodyCell
-										class="calendar_grid_body_cell"
-										v-for="{ keyDay, day } in week"
-										:key="keyDay"
-										:day="day" />
-								</CalendarGridRow>
-							</template>
-						</CalendarGridBody>
-					</CalendarGrid>
-				</CalendarContent>
+				<CalendarView>
+					<CalendarHeader class="calendar_header">
+						<CalendarPrevButton as-child>
+							<button>Atras</button>
+						</CalendarPrevButton>
+						<CalendarHeading as="h2" />
+						<CalendarNextButton />
+					</CalendarHeader>
+					<CalendarContent>
+						<CalendarGrid class="calendar_grid">
+							<CalendarGridHeader>
+								<template #default="{ weekDays }">
+									<CalendarGridRow>
+										<CalendarGridHeaderCell
+											v-for="day in weekDays"
+											:key="day.day"
+											:day="day"
+											format="EEEEE" />
+									</CalendarGridRow>
+								</template>
+							</CalendarGridHeader>
+							<CalendarGridBody>
+								<template #default="{ weeksInMonth }">
+									<CalendarGridRow
+										v-for="{ keyWeek, week } in weeksInMonth"
+										:key="keyWeek">
+										<CalendarGridBodyCell
+											class="calendar_grid_body_cell"
+											v-for="{ keyDay, day } in week"
+											:key="keyDay"
+											:day="day" />
+									</CalendarGridRow>
+								</template>
+							</CalendarGridBody>
+						</CalendarGrid>
+					</CalendarContent>
+				</CalendarView>
 			</CalendarSimpleRoot>
 		</section>
 
@@ -97,41 +103,43 @@
 				v-model:selected="selectedMultiple"
 				locale="es-PE"
 				class="calendar_root">
-				<CalendarHeader class="calendar_header">
-					<CalendarPrevButton as-child>
-						<button>Atras</button>
-					</CalendarPrevButton>
-					<CalendarHeading as="h2" />
-					<CalendarNextButton />
-				</CalendarHeader>
-				<CalendarContent>
-					<CalendarGrid class="calendar_grid">
-						<CalendarGridHeader>
-							<template #default="{ weekDays }">
-								<CalendarGridRow>
-									<CalendarGridHeaderCell
-										v-for="day in weekDays"
-										:key="day.day"
-										:day="day"
-										format="EEEEE" />
-								</CalendarGridRow>
-							</template>
-						</CalendarGridHeader>
-						<CalendarGridBody>
-							<template #default="{ weeksInMonth }">
-								<CalendarGridRow
-									v-for="{ keyWeek, week } in weeksInMonth"
-									:key="keyWeek">
-									<CalendarGridBodyCell
-										class="calendar_grid_body_cell"
-										v-for="{ keyDay, day } in week"
-										:key="keyDay"
-										:day="day" />
-								</CalendarGridRow>
-							</template>
-						</CalendarGridBody>
-					</CalendarGrid>
-				</CalendarContent>
+				<CalendarView>
+					<CalendarHeader class="calendar_header">
+						<CalendarPrevButton as-child>
+							<button>Atras</button>
+						</CalendarPrevButton>
+						<CalendarHeading as="h2" />
+						<CalendarNextButton />
+					</CalendarHeader>
+					<CalendarContent>
+						<CalendarGrid class="calendar_grid">
+							<CalendarGridHeader>
+								<template #default="{ weekDays }">
+									<CalendarGridRow>
+										<CalendarGridHeaderCell
+											v-for="day in weekDays"
+											:key="day.day"
+											:day="day"
+											format="EEEEE" />
+									</CalendarGridRow>
+								</template>
+							</CalendarGridHeader>
+							<CalendarGridBody>
+								<template #default="{ weeksInMonth }">
+									<CalendarGridRow
+										v-for="{ keyWeek, week } in weeksInMonth"
+										:key="keyWeek">
+										<CalendarGridBodyCell
+											class="calendar_grid_body_cell"
+											v-for="{ keyDay, day } in week"
+											:key="keyDay"
+											:day="day" />
+									</CalendarGridRow>
+								</template>
+							</CalendarGridBody>
+						</CalendarGrid>
+					</CalendarContent>
+				</CalendarView>
 			</CalendarMultipleRoot>
 		</section>
 
@@ -146,41 +154,127 @@
 				locale="es-PE"
 				class="calendar_root"
 				:max-value="new Date()">
-				<CalendarHeader class="calendar_header">
-					<CalendarPrevButton as-child>
-						<button>Atras</button>
-					</CalendarPrevButton>
-					<CalendarHeading as="h2" />
-					<CalendarNextButton />
-				</CalendarHeader>
-				<CalendarContent>
-					<CalendarGrid class="calendar_grid">
-						<CalendarGridHeader>
-							<template #default="{ weekDays }">
-								<CalendarGridRow>
-									<CalendarGridHeaderCell
-										v-for="day in weekDays"
-										:key="day.day"
-										:day="day"
-										format="EEEEE" />
-								</CalendarGridRow>
-							</template>
-						</CalendarGridHeader>
-						<CalendarGridBody>
-							<template #default="{ weeksInMonth }">
-								<CalendarGridRow
-									v-for="{ keyWeek, week } in weeksInMonth"
-									:key="keyWeek">
-									<CalendarGridBodyCell
-										class="calendar_grid_body_cell"
-										v-for="{ keyDay, day } in week"
-										:key="keyDay"
-										:day="day" />
-								</CalendarGridRow>
-							</template>
-						</CalendarGridBody>
-					</CalendarGrid>
-				</CalendarContent>
+				<CalendarView>
+					<CalendarHeader class="calendar_header">
+						<CalendarPrevButton as-child>
+							<button>Atras</button>
+						</CalendarPrevButton>
+						<CalendarHeading as="h2" />
+						<CalendarNextButton />
+					</CalendarHeader>
+					<CalendarContent>
+						<CalendarGrid class="calendar_grid">
+							<CalendarGridHeader>
+								<template #default="{ weekDays }">
+									<CalendarGridRow>
+										<CalendarGridHeaderCell
+											v-for="day in weekDays"
+											:key="day.day"
+											:day="day"
+											format="EEEEE" />
+									</CalendarGridRow>
+								</template>
+							</CalendarGridHeader>
+							<CalendarGridBody>
+								<template #default="{ weeksInMonth }">
+									<CalendarGridRow
+										v-for="{ keyWeek, week } in weeksInMonth"
+										:key="keyWeek">
+										<CalendarGridBodyCell
+											class="calendar_grid_body_cell"
+											v-for="{ keyDay, day } in week"
+											:key="keyDay"
+											:day="day" />
+									</CalendarGridRow>
+								</template>
+							</CalendarGridBody>
+						</CalendarGrid>
+					</CalendarContent>
+				</CalendarView>
+			</CalendarRangeRoot>
+		</section>
+
+		<section>
+			<h2>Calendar Range 2</h2>
+			<pre>{{ calendarRange2 }}</pre>
+			<pre>{{ selectedRange2 }}</pre>
+			<CalendarRangeRoot
+				ref="calendarSimpleRef"
+				v-model:month="calendarRange2"
+				v-model:selected="selectedRange2"
+				locale="es-PE"
+				class="calendar_root calendar_root--multiple"
+				:max-value="new Date()">
+				<CalendarView>
+					<CalendarHeader class="calendar_header">
+						<CalendarPrevButton as-child>
+							<button>Atras</button>
+						</CalendarPrevButton>
+						<CalendarHeading as="h2" />
+					</CalendarHeader>
+					<CalendarContent>
+						<CalendarGrid class="calendar_grid">
+							<CalendarGridHeader>
+								<template #default="{ weekDays }">
+									<CalendarGridRow>
+										<CalendarGridHeaderCell
+											v-for="day in weekDays"
+											:key="day.day"
+											:day="day"
+											format="EEEEE" />
+									</CalendarGridRow>
+								</template>
+							</CalendarGridHeader>
+							<CalendarGridBody>
+								<template #default="{ weeksInMonth }">
+									<CalendarGridRow
+										v-for="{ keyWeek, week } in weeksInMonth"
+										:key="keyWeek">
+										<CalendarGridBodyCell
+											class="calendar_grid_body_cell"
+											v-for="{ keyDay, day } in week"
+											:key="keyDay"
+											:day="day" />
+									</CalendarGridRow>
+								</template>
+							</CalendarGridBody>
+						</CalendarGrid>
+					</CalendarContent>
+				</CalendarView>
+				<CalendarView :offset-month="1">
+					<CalendarHeader class="calendar_header">
+						<CalendarHeading as="h2" />
+						<CalendarNextButton />
+					</CalendarHeader>
+					<CalendarContent>
+						<CalendarGrid class="calendar_grid">
+							<CalendarGridHeader>
+								<template #default="{ weekDays }">
+									<CalendarGridRow>
+										<CalendarGridHeaderCell
+											v-for="day in weekDays"
+											:key="day.day"
+											:day="day"
+											format="EEEEE" />
+									</CalendarGridRow>
+								</template>
+							</CalendarGridHeader>
+							<CalendarGridBody>
+								<template #default="{ weeksInMonth }">
+									<CalendarGridRow
+										v-for="{ keyWeek, week } in weeksInMonth"
+										:key="keyWeek">
+										<CalendarGridBodyCell
+											class="calendar_grid_body_cell"
+											v-for="{ keyDay, day } in week"
+											:key="keyDay"
+											:day="day" />
+									</CalendarGridRow>
+								</template>
+							</CalendarGridBody>
+						</CalendarGrid>
+					</CalendarContent>
+				</CalendarView>
 			</CalendarRangeRoot>
 		</section>
 	</main>
@@ -210,6 +304,12 @@
 	.calendar_root {
 		display: flex;
 		flex-direction: column;
+		gap: 1rem;
+	}
+
+	.calendar_root--multiple {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
 		gap: 1rem;
 	}
 

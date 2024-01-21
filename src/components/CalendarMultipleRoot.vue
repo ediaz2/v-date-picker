@@ -1,7 +1,7 @@
 <script setup lang="ts">
 	import { Primitive } from 'radix-vue';
 	import type { CalendarEventProps } from '~/types/calendar';
-	import { provideCalendarRoot } from '~/providers/calendar';
+	import { providerCalendarRoot } from '~/providers/calendar';
 	import { getLocalTimeZone } from '@internationalized/date';
 	import type {
 		CalendarMultipleRootEmits,
@@ -36,7 +36,7 @@
 		);
 	};
 
-	provideCalendarRoot({
+	providerCalendarRoot({
 		selected: selected,
 		month: props.month,
 		timeZone,

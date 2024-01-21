@@ -7,24 +7,34 @@
 	import { Primitive, type PrimitiveProps } from 'radix-vue';
 	import { computed } from 'vue';
 	import { injectCalendarRoot } from '~/providers/calendar';
+	import { injectCalendarView } from '~/providers/calendarView';
 
 	import { getStartOfWeek } from '~/utils/getStartOfWeek';
 
-	withDefaults(defineProps<PrimitiveProps>(), {
+	const props = withDefaults(defineProps<PrimitiveProps>(), {
 		as: 'tbody',
 	});
 
 	const { month, locale, startOfWeek } = injectCalendarRoot();
+	const { offsetMonth } = injectCalendarView();
+
+	const currentMonth = computed(() =>
+		month.value.add({ months: offsetMonth.value }),
+	);
 
 	const startOfMonth = computed(() =>
 		getStartOfWeek(
-			startOfMonthFn(month.value),
+			startOfMonthFn(currentMonth.value),
 			locale.value,
 			startOfWeek.value,
 		),
 	);
 	const endOfMonth = computed(() =>
-		getStartOfWeek(endOfMonthFn(month.value), locale.value, startOfWeek.value),
+		getStartOfWeek(
+			endOfMonthFn(currentMonth.value),
+			locale.value,
+			startOfWeek.value,
+		),
 	);
 
 	const weeksInMonth = computed(() => {
@@ -49,7 +59,7 @@
 </script>
 
 <template>
-	<Primitive :as="as" :as-child="asChild">
+	<Primitive :as="props.as" :as-child="asChild">
 		<slot :weeksInMonth="weeksInMonth" />
 	</Primitive>
 </template>

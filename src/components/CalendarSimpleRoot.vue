@@ -5,7 +5,7 @@
 		CalendarRootProps,
 		CalendarEventProps,
 	} from '~/types/calendar';
-	import { provideCalendarRoot } from '~/providers/calendar';
+	import { providerCalendarRoot } from '~/providers/calendar';
 	import { parseDate, parseDateToMap } from '~/utils/parseDate';
 	import { getDay } from '~/utils/getDay';
 	import { getLocalTimeZone } from '~/utils/getLocalTimeZone';
@@ -30,7 +30,7 @@
 		emit('update:selected', day.toDate(timeZone));
 	};
 
-	provideCalendarRoot({
+	providerCalendarRoot({
 		selected,
 		month: props.month,
 		timeZone,
