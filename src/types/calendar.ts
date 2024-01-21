@@ -9,6 +9,7 @@ export interface CalendarRootProps extends PrimitiveProps {
 	locale?: string;
 	disabled?: boolean;
 	readOnly?: boolean;
+	startOfWeek?: number;
 	// visibleDuration
 	// pageBehavior
 	// minValue
@@ -35,6 +36,7 @@ export interface CalendarRootContext {
 	month?: Date;
 	timeZone: string;
 	locale: string;
+	startOfWeek?: number;
 	disabled: boolean;
 	readOnly: boolean;
 	onAdditonalProps?: (
@@ -52,6 +54,7 @@ export interface CalendarRootInjection {
 	selected: ShallowReactive<Map<string, CalendarDate>>;
 	today: CalendarDate;
 	locale: ComputedRef<string>;
+	startOfWeek: ComputedRef<number | undefined>;
 	timeZone: ComputedRef<string>;
 	disabled: ComputedRef<boolean>;
 	readOnly: ComputedRef<boolean>;

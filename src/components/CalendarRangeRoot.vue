@@ -122,6 +122,7 @@
 		month: props.month,
 		timeZone: props.timeZone,
 		locale: props.locale,
+		startOfWeek: props.startOfWeek,
 		disabled: props.disabled,
 		readOnly: props.readOnly,
 		onAdditonalProps,

@@ -8,9 +8,11 @@
 		as: 'thead',
 	});
 
-	const { month, locale } = injectCalendarRoot();
+	const { month, locale, startOfWeek } = injectCalendarRoot();
 
-	const weekDays = computed(() => _weekDays(month.value, locale.value));
+	const weekDays = computed(() =>
+		_weekDays(month.value, locale.value, startOfWeek.value),
+	);
 </script>
 
 <template>

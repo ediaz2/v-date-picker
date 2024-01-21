@@ -14,6 +14,7 @@
 		locale: 'en-US',
 		disabled: false,
 		readOnly: false,
+		startOfWeek: 0,
 	});
 
 	const emit = defineEmits<CalendarRootEmits>();
@@ -29,6 +30,7 @@
 		month: props.month,
 		timeZone: props.timeZone,
 		locale: props.locale,
+		startOfWeek: props.startOfWeek,
 		disabled: props.disabled,
 		readOnly: props.readOnly,
 		onClick,

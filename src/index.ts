@@ -18,4 +18,3 @@ export { default as CalendarRangeRoot } from './components/CalendarRangeRoot.vue
 
 // UTILS
 export { formatDate } from './utils/formatDate';
-export { getDatesInWeek } from './utils/getDatesInWeek';

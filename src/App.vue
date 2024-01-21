@@ -13,7 +13,6 @@
 	import CalendarGridHeaderCell from './components/base/CalendarGridHeaderCell.vue';
 	import CalendarGridBody from './components/base/CalendarGridBody.vue';
 	import CalendarGridBodyCell from './components/base/CalendarGridBodyCell.vue';
-	import { getDatesInWeek } from './utils/getDatesInWeek';
 	import { ref } from 'vue';
 
 	const calendar = ref<Date>();
@@ -35,6 +34,7 @@
 			<CalendarSimpleRoot
 				v-model:month="calendar"
 				v-model:selected="selected"
+				:start-of-week="1"
 				locale="es-PE"
 				class="calendar_root">
 				<CalendarHeader class="calendar_header">
@@ -60,12 +60,12 @@
 						<CalendarGridBody>
 							<template #default="{ weeksInMonth }">
 								<CalendarGridRow
-									v-for="{ key, week } in weeksInMonth"
-									:key="key">
+									v-for="{ keyWeek, week } in weeksInMonth"
+									:key="keyWeek">
 									<CalendarGridBodyCell
 										class="calendar_grid_body_cell"
-										v-for="day in getDatesInWeek(week)"
-										:key="day.day.toString()"
+										v-for="{ keyDay, day } in week"
+										:key="keyDay"
 										:day="day" />
 								</CalendarGridRow>
 							</template>
@@ -107,17 +107,13 @@
 						<CalendarGridBody>
 							<template #default="{ weeksInMonth }">
 								<CalendarGridRow
-									v-for="{ key, week } in weeksInMonth"
-									:key="key">
+									v-for="{ keyWeek, week } in weeksInMonth"
+									:key="keyWeek">
 									<CalendarGridBodyCell
 										class="calendar_grid_body_cell"
-										v-for="day in getDatesInWeek(week)"
-										:key="day.day.toString()"
-										:day="day">
-										<span>
-											{{ day }}
-										</span>
-									</CalendarGridBodyCell>
+										v-for="{ keyDay, day } in week"
+										:key="keyDay"
+										:day="day" />
 								</CalendarGridRow>
 							</template>
 						</CalendarGridBody>
@@ -158,12 +154,12 @@
 						<CalendarGridBody>
 							<template #default="{ weeksInMonth }">
 								<CalendarGridRow
-									v-for="{ key, week } in weeksInMonth"
-									:key="key">
+									v-for="{ keyWeek, week } in weeksInMonth"
+									:key="keyWeek">
 									<CalendarGridBodyCell
 										class="calendar_grid_body_cell"
-										v-for="day in getDatesInWeek(week)"
-										:key="day.day.toString()"
+										v-for="{ keyDay, day } in week"
+										:key="keyDay"
 										:day="day" />
 								</CalendarGridRow>
 							</template>
