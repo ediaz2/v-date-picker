@@ -7,6 +7,8 @@
 		CalendarMultipleRootEmits,
 		CalendarMultipleRootProps,
 	} from '~/types/calendar_multiple';
+	import { parseDate, parseDateToMap } from '~/utils/parseDate';
+	import { getDay } from '~/utils/getDay';
 
 	const props = withDefaults(defineProps<CalendarMultipleRootProps>(), {
 		as: 'div',
@@ -17,8 +19,11 @@
 	});
 
 	const emit = defineEmits<CalendarMultipleRootEmits>();
+	const locale = props.locale;
+	const selected = parseDateToMap(locale, props.selected);
+	const timeZone = props.timeZone;
 
-	const onClick = ({ selected, key, day, timeZone }: CalendarEventProps) => {
+	const onClick = ({ key, day }: CalendarEventProps) => {
 		if (selected.has(key)) {
 			selected.delete(key);
 		} else {
@@ -32,15 +37,27 @@
 	};
 
 	provideCalendarRoot({
-		selected: props.selected,
+		selected: selected,
 		month: props.month,
-		timeZone: props.timeZone,
-		locale: props.locale,
+		timeZone,
+		locale,
 		startOfWeek: props.startOfWeek,
 		disabled: props.disabled,
 		readOnly: props.readOnly,
 		onClick,
 		onUpdatedMonth: (value) => emit('update:month', value),
+	});
+
+	defineExpose({
+		onSelect: (value: Date[]) => {
+			selected.clear();
+			value.forEach((date) => {
+				onClick({
+					key: getDay(date, locale),
+					day: parseDate(date, locale),
+				});
+			});
+		},
 	});
 </script>
 

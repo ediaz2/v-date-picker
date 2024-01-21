@@ -10,6 +10,7 @@
 	import { isDateInRange } from '~/utils/isDateInRange';
 	import { ref } from 'vue';
 	import { getDay } from '~/utils/getDay';
+	import { parseDate, parseDateToMap } from '~/utils/parseDate';
 
 	const props = withDefaults(defineProps<CalendarRangeRootProps>(), {
 		as: 'div',
@@ -22,8 +23,11 @@
 	const emit = defineEmits<CalendarRangeRootEmits>();
 	const startDate = ref<CalendarDate | null>(null);
 	const endDate = ref<CalendarDate | null>(null);
+	const locale = props.locale;
+	const selected = parseDateToMap(locale, props.selected);
+	const timeZone = props.timeZone;
 
-	const onClick = ({ selected, key, day, timeZone }: CalendarEventProps) => {
+	const onClick = ({ key, day }: CalendarEventProps) => {
 		if (selected.size > 0) {
 			if (!endDate.value) {
 				selected.set(key, day);
@@ -49,37 +53,37 @@
 		}
 
 		if (selected.size === 0) {
-			console.log('set');
 			selected.set(key, day);
 			startDate.value = day;
 			return;
 		}
 	};
 
-	const onMouseEnter = ({ selected, key, day }: CalendarEventProps) => {
+	const onMouseEnter = ({ key, day }: CalendarEventProps) => {
 		if (endDate.value) return;
 		if (selected.size === 1) {
 			selected.set(key, day);
 		}
 	};
 
-	const onMouseLeave = ({ selected, key, timeZone }: CalendarEventProps) => {
+	const onMouseLeave = ({ key }: CalendarEventProps) => {
 		if (endDate.value) return;
 		if (!startDate.value) return;
-		if (key !== getDay(startDate.value.toDate(timeZone)) && selected.has(key)) {
+		if (
+			key !== getDay(startDate.value.toDate(timeZone), locale) &&
+			selected.has(key)
+		) {
 			selected.delete(key);
 		}
 	};
 
-	const onCheckSelected = ({
-		selected,
-		day,
-		timeZone,
-		key,
-	}: CalendarEventProps): boolean => {
+	const onCheckSelected = ({ day, key }: CalendarEventProps): boolean => {
 		if (selected.size === 0) return false;
 
-		if (startDate.value && key === getDay(startDate.value.toDate(timeZone))) {
+		if (
+			startDate.value &&
+			key === getDay(startDate.value.toDate(timeZone), locale)
+		) {
 			return true;
 		}
 
@@ -88,14 +92,10 @@
 		return isDateInRange({ day, start, end, timeZone });
 	};
 
-	const onAdditonalProps = ({
-		selected,
-		timeZone,
-		key,
-	}: CalendarEventProps) => {
+	const onAdditonalProps = ({ key }: CalendarEventProps) => {
 		if (selected.size === 0) return {};
 		if (selected.size === 1 && startDate.value) {
-			const value = getDay(startDate.value.toDate(timeZone)) === key;
+			const value = getDay(startDate.value.toDate(timeZone), locale) === key;
 			return {
 				'data-selection-start': value || undefined,
 				'data-selection-end': value || undefined,
@@ -109,8 +109,9 @@
 
 			return {
 				'data-selection-start':
-					key === getDay(start.toDate(timeZone)) || undefined,
-				'data-selection-end': key === getDay(end.toDate(timeZone)) || undefined,
+					key === getDay(start.toDate(timeZone), locale) || undefined,
+				'data-selection-end':
+					key === getDay(end.toDate(timeZone), locale) || undefined,
 			};
 		}
 
@@ -118,10 +119,10 @@
 	};
 
 	provideCalendarRoot({
-		selected: props.selected,
+		selected,
 		month: props.month,
-		timeZone: props.timeZone,
-		locale: props.locale,
+		timeZone,
+		locale,
 		startOfWeek: props.startOfWeek,
 		disabled: props.disabled,
 		readOnly: props.readOnly,
@@ -133,6 +134,19 @@
 		onMouseLeave,
 		onCheckSelected,
 		onUpdatedMonth: (value) => emit('update:month', value),
+	});
+
+	defineExpose({
+		onSelect: (value: [Date, Date]) => {
+			selected.clear();
+			startDate.value = null;
+			endDate.value = null;
+			value.forEach((date) => {
+				selected.set(getDay(date, locale), parseDate(date, locale));
+			});
+
+			emit('update:selected', value);
+		},
 	});
 </script>
 

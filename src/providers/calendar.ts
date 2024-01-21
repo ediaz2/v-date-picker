@@ -10,7 +10,6 @@ import type {
 	CalendarRootContext,
 	CalendarRootInjection,
 } from '~/types/calendar';
-import { parseDateToMap } from '~/utils/parseDate';
 
 export const CalendarRoot = Symbol(
 	'CalendarRoot',
@@ -46,7 +45,7 @@ export const provideCalendarRoot = ({
 
 	provide(CalendarRoot, {
 		month: _month,
-		selected: parseDateToMap(selected),
+		selected,
 		today: today(_timeZone.value),
 		timeZone: _timeZone,
 		locale: computed(() => locale),

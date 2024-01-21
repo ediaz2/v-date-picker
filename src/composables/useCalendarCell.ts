@@ -21,9 +21,10 @@ export const useCalendarCell = ({ day }: CalendarGridHeaderCellProps) => {
 		onCheckSelected,
 	} = injectCalendarRoot();
 
-	const key = getDay(day.toDate(timeZone.value));
+	const key = getDay(day.toDate(timeZone.value), locale.value);
 	const isToday = computed(() => today.toString() === day.toString());
-	const propsEvent = { selected, day, key, timeZone: timeZone.value };
+	const propsEvent = { day, key };
+
 	// outside-month
 	const isOutsideMonth = computed(() => day.month !== month.value.month);
 	const additonalProps = computed(() => {

@@ -23,14 +23,12 @@ export type CalendarRootEmits = {
 };
 
 export interface CalendarEventProps {
-	selected: ShallowReactive<Map<string, CalendarDate>>;
 	day: CalendarDate;
 	key: string;
-	timeZone: string;
 }
 
 export interface CalendarRootContext {
-	selected?: Date | Date[];
+	selected: ShallowReactive<Map<string, CalendarDate>>;
 	month?: Date;
 	timeZone: string;
 	locale: string;

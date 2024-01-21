@@ -14,9 +14,12 @@
 	import CalendarGridBody from './components/base/CalendarGridBody.vue';
 	import CalendarGridBodyCell from './components/base/CalendarGridBodyCell.vue';
 	import { ref } from 'vue';
+	import { getDayISO } from './utils/getDay';
+	import { getLocalTimeZone } from '~/utils/getLocalTimeZone';
 
 	const calendar = ref<Date>();
 	const selected = ref<Date>();
+	const calendarSimpleRef = ref<typeof CalendarSimpleRoot>();
 
 	const calendarMultiple = ref<Date>();
 	const selectedMultiple = ref<Date[]>([]);
@@ -31,6 +34,16 @@
 			<h2>Calendar</h2>
 			<pre>{{ calendar }}</pre>
 			<pre>{{ selected }}</pre>
+
+			<button
+				@click="
+					calendarSimpleRef?.onSelect([
+						getDayISO('2024-01-15', getLocalTimeZone()),
+						new Date(),
+					])
+				">
+				Set today
+			</button>
 			<CalendarSimpleRoot
 				v-model:month="calendar"
 				v-model:selected="selected"
@@ -127,6 +140,7 @@
 			<pre>{{ calendarRange }}</pre>
 			<pre>{{ selectedRange }}</pre>
 			<CalendarRangeRoot
+				ref="calendarSimpleRef"
 				v-model:month="calendarRange"
 				v-model:selected="selectedRange"
 				locale="es-PE"

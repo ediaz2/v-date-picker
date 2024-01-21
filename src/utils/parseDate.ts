@@ -2,13 +2,20 @@ import { type CalendarDate, parseDate as parse } from '@internationalized/date';
 import { getDay } from './getDay';
 
 import { type ShallowReactive, shallowReactive } from 'vue';
+import { formatDate } from './formatDate';
 
-const createMapEntry = (date: Date): [string, CalendarDate] => {
-	const isoString = date.toISOString();
-	return [getDay(date), parse(isoString)];
+export const parseDate = (date: Date, locale: string): CalendarDate => {
+	const isoString = formatDate(date, 'yyyy-MM-dd', locale);
+
+	return parse(isoString);
+};
+
+const createMapEntry = (date: Date, locale: string): [string, CalendarDate] => {
+	return [getDay(date, locale), parseDate(date, locale)];
 };
 
 export const parseDateToMap = (
+	locale: string,
 	date?: Date | Date[],
 ): ShallowReactive<Map<string, CalendarDate>> => {
 	if (!date) {
@@ -16,8 +23,8 @@ export const parseDateToMap = (
 	}
 
 	if (Array.isArray(date)) {
-		return shallowReactive(new Map(date.map(createMapEntry)));
+		return shallowReactive(new Map(date.map((d) => createMapEntry(d, locale))));
 	}
 
-	return shallowReactive(new Map([createMapEntry(date)]));
+	return shallowReactive(new Map([createMapEntry(date, locale)]));
 };

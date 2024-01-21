@@ -18,3 +18,5 @@ export { default as CalendarRangeRoot } from './components/CalendarRangeRoot.vue
 
 // UTILS
 export { formatDate } from './utils/formatDate';
+export { getDayISO } from './utils/getDay';
+export { getLocalTimeZone } from './utils/getLocalTimeZone';
