@@ -2,6 +2,8 @@ import type { CalendarRootProps } from './calendar';
 
 export interface CalendarRangeRootProps
 	extends Omit<CalendarRootProps, 'selected'> {
+	minValue?: Date;
+	maxValue?: Date;
 	selected?: [Date, Date];
 }
 

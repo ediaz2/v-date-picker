@@ -130,7 +130,8 @@
 				v-model:month="calendarRange"
 				v-model:selected="selectedRange"
 				locale="es-PE"
-				class="calendar_root">
+				class="calendar_root"
+				:max-value="new Date()">
 				<CalendarHeader class="calendar_header">
 					<CalendarPrevButton as-child>
 						<button>Atras</button>

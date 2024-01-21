@@ -12,6 +12,8 @@ export const useCalendarCell = ({ day }: CalendarGridHeaderCellProps) => {
 		locale,
 		disabled,
 		readOnly,
+		minValue,
+		maxValue,
 		onAdditonalProps,
 		onClick,
 		onMouseEnter,
@@ -47,9 +49,20 @@ export const useCalendarCell = ({ day }: CalendarGridHeaderCellProps) => {
 	// const isSelectable = ref(props.isSelectable);
 	// const isInvalid = ref(false);
 
+	const isDisabled = computed(() => {
+		if (disabled.value) return true;
+		if (minValue.value) {
+			return day.toDate(timeZone.value) < minValue.value;
+		}
+		if (maxValue.value) {
+			return day.toDate(timeZone.value) > maxValue.value;
+		}
+		return false;
+	});
+
 	const cellProps = computed(() => ({
 		role: 'gridcell',
-		'aria-disabled': disabled.value ?? undefined,
+		'aria-disabled': disabled.value || isDisabled.value || undefined,
 		'aria-selected': isSelected.value || undefined,
 		// 'aria-invalid': isInvalid ?? undefined,
 		'data-today': isToday.value || undefined,
@@ -68,7 +81,7 @@ export const useCalendarCell = ({ day }: CalendarGridHeaderCellProps) => {
 		...additonalProps.value,
 		// Range selection
 		onClick: () => {
-			if (!readOnly.value) {
+			if (!readOnly.value && !isDisabled.value) {
 				onClick(propsEvent);
 			}
 		},

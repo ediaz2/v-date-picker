@@ -125,6 +125,8 @@
 		startOfWeek: props.startOfWeek,
 		disabled: props.disabled,
 		readOnly: props.readOnly,
+		minValue: props.minValue,
+		maxValue: props.maxValue,
 		onAdditonalProps,
 		onClick,
 		onMouseEnter,

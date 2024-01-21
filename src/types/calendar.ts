@@ -12,8 +12,6 @@ export interface CalendarRootProps extends PrimitiveProps {
 	startOfWeek?: number;
 	// visibleDuration
 	// pageBehavior
-	// minValue
-	// maxValue
 	// isDateUnavailable
 	// check
 	// showWeekNumbers
@@ -39,6 +37,8 @@ export interface CalendarRootContext {
 	startOfWeek?: number;
 	disabled: boolean;
 	readOnly: boolean;
+	minValue?: Date;
+	maxValue?: Date;
 	onAdditonalProps?: (
 		props: CalendarEventProps,
 	) => Record<string, string | number | boolean | undefined>;
@@ -58,6 +58,8 @@ export interface CalendarRootInjection {
 	timeZone: ComputedRef<string>;
 	disabled: ComputedRef<boolean>;
 	readOnly: ComputedRef<boolean>;
+	minValue: ComputedRef<Date | undefined>;
+	maxValue: ComputedRef<Date | undefined>;
 	onAdditonalProps?: (
 		props: CalendarEventProps,
 	) => Record<string, string | number | boolean | undefined>;
